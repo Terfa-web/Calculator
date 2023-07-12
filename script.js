@@ -1,44 +1,4 @@
 
-/*
-function Calculator() {
-
-  this.methods = {
-    "+": function (a,b) { return a + b},
-    "-": function (a,b) { return a - b},
-    "*": function (a,b) { return a * b},
-    "/": function (a,b) { return a / b},
-  },
-
-  this.calculate = function(str) {
-//convert the string str to an array 
-      const array = str.split('')
-      console.log(array);
-      //assign varibles to each element in the array
-      let a =  +array[0];
-      let op = array[1];
-      let b = +array[2] ;
-      console.log(a, b)
-      if(! array.includes(op) || isNaN(a) || isNaN(b)) {
-        return NaN;
-      }
-
-      //call the methods method and invoke the function inside with parameter a and b;
-      else return this.methods[op](a,b);
-  };
-  this.addMethod = function(name,func) {
-    //call the methods object and create a new function that is passed in.
-      this.methods[name] = func;
-      
-  };
-}
-
-let calc = new Calculator;
- //calc.addMethod("*", (a,b) => a * b);
- console.log(calc.calculate('4+2'));*/
-
-
-//////////////////////////////////////////////////
-
 
 //select the display-result textarea
 const textArea = document.querySelector('.textarea');
