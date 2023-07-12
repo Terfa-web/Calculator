@@ -94,6 +94,8 @@ let firstNumber ='';
 let operator = '';
 
 function storeFirstItem (e) {
+//find out if e.target.textContent contains an operator if it does, call operate function.
+
 
     const enteredValue = result;    
     for(let i = 0; i<enteredValue.length; i ++) {
@@ -103,7 +105,9 @@ function storeFirstItem (e) {
         operator += enteredValue[i];
         break;
       }
-    }   
+    }  
+    console.log(firstNumber)
+    console.log(operator) 
 }
 
 // find the third variable when equals button is pressed
@@ -111,7 +115,8 @@ let secondNumber = '';
 function evaluate (e) {
   if ( e.target.textContent === '=') {
     
-  //find the index of the non numeric character 
+    
+  //find the index of the non numeric character and assign it to nonNumIndex
     let nonNumIndex = result.search(/\D/);
 
   //extract the part of the string after the non-numeric character and assign it to secondNumber variable
@@ -119,13 +124,19 @@ function evaluate (e) {
 
   }
   // display evaluated result to textArea
-  textArea.value = JSON.stringify(operate(operator,firstNumber,secondNumber));
+  textArea.value = JSON.stringify(operate(operator,firstNumber,secondNumber))
+  result = JSON.stringify(operate(operator,firstNumber,secondNumber));
+  
+  firstNumber = '';//empty out firstNum and operator.
+  operator = '' ;
 }
 
 //selects button elements from html file
  const dataInput = document.querySelectorAll('.data-input'); 
  
  const backArrow = document.querySelector('.backarrow');
+
+ const percent = document.querySelector('.percent');
 
  const equals = document.querySelector('.equals');
 
@@ -142,8 +153,15 @@ function evaluate (e) {
  });
 
   backArrow.addEventListener('click', deleteLast);
+
   equals.addEventListener('click', evaluate);
+
   clear.addEventListener('click', clearScreen);
+  
   operators.forEach((operator) => {
     operator.addEventListener('click', storeFirstItem);
-  })
+  });
+
+  percent.addEventListener('click', () => {
+    textArea.value = textArea.value/100;
+  });

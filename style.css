@@ -1,0 +1,71 @@
+body {
+  background-color: rgba(113, 139, 161, 0.265);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.overall {
+  border: 2px solid yellow;
+}
+.display-screen {
+  border-top: 1.5px solid rgb(254, 160, 10);
+  border-right: 1.5px solid rgb(254, 160, 10);
+  border-left: 1.5px solid rgb(254, 160, 10);
+  border-radius: 10px;
+  margin-top: 70px;
+  margin-bottom: 2px;
+  display: flex;
+  background-color: #b2b9b7;
+  width:  350px;
+  height: 70px;
+  justify-content: flex-end;
+  
+}
+
+.textarea {
+  border: none;
+  background-color: transparent;
+  color: white;
+  padding-top: 25px;
+  padding-right: 10px;
+  font-size: 30px;
+  text-align: right;
+  margin-bottom: 2px;
+  overflow: hidden;
+  white-space:
+}
+
+
+.main-container {
+  border-bottom: 2px solid rgb(188, 138, 57);
+  border-right: 2px solid rgb(254, 160, 10);
+  border-left: 2px solid rgb(254, 160, 10);
+  margin-top: 2px;
+  height: 400px;
+  width: 350px;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+button {
+  border-radius: 30px;
+
+  border-block-width: 4px;
+  color: white;
+  font-size: 30px;
+  margin: 5px;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(51, 51, 51);
+  cursor: pointer;
+}
+
+.yellow {
+  background-color: rgb(254, 160, 10);
+}
