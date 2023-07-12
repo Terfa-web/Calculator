@@ -1,5 +1,5 @@
 
-
+/*
 function Calculator() {
 
   this.methods = {
@@ -34,17 +34,22 @@ function Calculator() {
 
 let calc = new Calculator;
  //calc.addMethod("*", (a,b) => a * b);
- console.log(calc.calculate('4+2'));
+ console.log(calc.calculate('4+2'));*/
+
+
+//////////////////////////////////////////////////
+
 
 //select the display-result textarea
-const textArea = document.querySelector('.result');
+const textArea = document.querySelector('.textarea');
 
 
 //limit the number of characters a user can enter
 textArea.addEventListener('input', () => {
   if (textArea.value.length > 20) {
     textArea.value = textArea.value.slice(0,20);
-  }
+  } else if ( isNaN(textArea.value) ) { alert(`Only numbers are allowed. Thanks`) 
+  location.reload()}
 });
 
 //clear the screen 
@@ -59,72 +64,86 @@ textArea.addEventListener('input', () => {
   };
 
 
-//create a variable to hold the result of events
-let result = '';
 
+//the operate function
+
+function operate (op, a, b) {
+  let numA = +a;
+  let numB = +b;
+  if (op === '+') {  
+     return numA + numB;
+  } else if (op === '-') {
+    return numA - numB;
+  } else if (op === '*') {
+    return numA * numB;
+  } else if (op === '/') {
+    return numA / numB;
+  }
+}
+
+let result = '';
 function display(e) {
   result += e.target.textContent;
-  console.log( typeof result)
   textArea.value = result;
 }
 
-//take screen values and evaluate them and display contents
+//store the first number when an operator is pressed
+ 
+//create a variables to hold the result of events
+let firstNumber ='';
+let operator = '';
 
-function calculate () {
+function storeFirstItem (e) {
 
-    //convert the string str to an array 
-          const arrayOfString = result.split('')
-          console.log(result);
-          //assign varibles to each element in the array
-          let a =  +arrayOfString[0];
-          let op = arrayOfString[1];
-          let b = +arrayOfString[2] ;
-          console.log(a, b)
-          if(! array.includes(op) || isNaN(a) || isNaN(b)) {
-            return NaN;
-          }
+    const enteredValue = result;    
+    for(let i = 0; i<enteredValue.length; i ++) {
+      if(/\d/.test(enteredValue[i])) {
+        firstNumber += enteredValue[i];      
+      } else {
+        operator += enteredValue[i];
+        break;
+      }
+    }   
 }
+
+// find the third variable when equals button is pressed
+let secondNumber = '';
+function evaluate (e) {
+  if ( e.target.textContent === '=') {
+    
+  //find the index of the non numeric character 
+    let nonNumIndex = result.search(/\D/);
+
+  //extract the part of the string after the non-numeric character and assign it to secondNumber variable
+  secondNumber = result.substring(nonNumIndex + 1);
+
+  }
+  // display evaluated result to textArea
+  textArea.value = JSON.stringify(operate(operator,firstNumber,secondNumber));
+}
+
 //selects button elements from html file
- const numberZero = document.querySelector('.zero')
- const numberOne = document.querySelector('.one'); 
- const numberTwo = document.querySelector('.two');
- const numberThree = document.querySelector('.three');
- const numberFour = document.querySelector('.four');
- const numberFive = document.querySelector('.five');
- const numberSix = document.querySelector('.six');
- const numberSeven = document.querySelector('.seven');
- const numberEight = document.querySelector('.eight');
- const numberNine = document.querySelector('.nine');
- const divide = document.querySelector('.divide');
- const multiply = document.querySelector('.multiply');
- const subtract = document.querySelector('.subtract');
- const add = document.querySelector('.add');
- const dot = document.querySelector('.dot');
- const percent = document.querySelector('.percent');
+ const dataInput = document.querySelectorAll('.data-input'); 
+ 
  const backArrow = document.querySelector('.backarrow');
+
  const equals = document.querySelector('.equals');
+
  const clear = document.querySelector('.clear');
  
+ let operators = document.querySelectorAll('.operator');
 
 
 
- //add event listeners to each button element
-      numberZero.addEventListener('click', display);
-      numberOne.addEventListener('click', display);
-      numberTwo.addEventListener('click', display);
-      numberThree.addEventListener('click', display);
-      numberFour.addEventListener('click', display);
-      numberFive.addEventListener('click', display);
-      numberSix.addEventListener('click', display);
-      numberSeven.addEventListener('click', display);
-      numberEight.addEventListener('click', display);
-      numberNine.addEventListener('click', display);
-      divide.addEventListener('click', display);
-      multiply.addEventListener('click', display);
-      subtract.addEventListener('click', display);
-      add.addEventListener('click', display);
-      dot.addEventListener('click', display);
-      percent.addEventListener('click', display);
-      backArrow.addEventListener('click', deleteLast);
-      equals.addEventListener('click', calculate);
-      clear.addEventListener('click', clearScreen);
+ //add event listeners to each input button element
+
+ dataInput.forEach((input) => {
+      input.addEventListener('click', display)
+ });
+
+  backArrow.addEventListener('click', deleteLast);
+  equals.addEventListener('click', evaluate);
+  clear.addEventListener('click', clearScreen);
+  operators.forEach((operator) => {
+    operator.addEventListener('click', storeFirstItem);
+  })
